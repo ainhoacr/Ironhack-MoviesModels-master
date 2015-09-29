@@ -44,6 +44,7 @@
         loggedUser = [self addUserWithUserName:username andPassword:password];
     }
     if (loggedUser) {
+        [self saveUserDefaults];
         [[NSNotificationCenter defaultCenter] postNotificationName:UserLoggedNotification object:loggedUser];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -68,6 +69,11 @@
     NSError *error;
     [self.context save:&error];
     return user;
+}
+
+- (void)saveUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults]setObject:[NSDate date] forKey:@"lastLoginDate"];
 }
 
 

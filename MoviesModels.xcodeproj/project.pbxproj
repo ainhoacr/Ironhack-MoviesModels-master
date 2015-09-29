@@ -27,6 +27,7 @@
 		D7DE78951BBA885300C06E84 /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DE78941BBA885300C06E84 /* UserLoginViewController.m */; settings = {ASSET_TAGS = (); }; };
 		D7DE789A1BBA8F6600C06E84 /* UserEntity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DE78971BBA8F6600C06E84 /* UserEntity+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		D7DE789B1BBA8F6600C06E84 /* UserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DE78991BBA8F6600C06E84 /* UserEntity.m */; settings = {ASSET_TAGS = (); }; };
+		D7DE78DD1BBAE68100C06E84 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7DE78DC1BBAE68100C06E84 /* ProfileViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		D7DE78971BBA8F6600C06E84 /* UserEntity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UserEntity+CoreDataProperties.m"; sourceTree = "<group>"; };
 		D7DE78981BBA8F6600C06E84 /* UserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEntity.h; sourceTree = "<group>"; };
 		D7DE78991BBA8F6600C06E84 /* UserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEntity.m; sourceTree = "<group>"; };
+		D7DE78DB1BBAE68100C06E84 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		D7DE78DC1BBAE68100C06E84 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 				8C0709CA1BB85CD40000F8CC /* ShowsProvider.m */,
 				8C07098D1BB8408F0000F8CC /* ShowsTableViewController.h */,
 				8C07098E1BB8408F0000F8CC /* ShowsTableViewController.m */,
+				D7DE78DB1BBAE68100C06E84 /* ProfileViewController.h */,
+				D7DE78DC1BBAE68100C06E84 /* ProfileViewController.m */,
 				8C0709871BB8408F0000F8CC /* Supporting Files */,
 			);
 			path = MoviesModels;
@@ -386,6 +391,7 @@
 				8C0709CB1BB85CD40000F8CC /* ShowsProvider.m in Sources */,
 				8C0709C51BB842770000F8CC /* NSString+Random.m in Sources */,
 				D7DE788F1BBA80AE00C06E84 /* MoviesModels.xcdatamodeld in Sources */,
+				D7DE78DD1BBAE68100C06E84 /* ProfileViewController.m in Sources */,
 				D7DE789A1BBA8F6600C06E84 /* UserEntity+CoreDataProperties.m in Sources */,
 				D7DE78951BBA885300C06E84 /* UserLoginViewController.m in Sources */,
 				8C0709C21BB841940000F8CC /* Movie.m in Sources */,

@@ -17,6 +17,7 @@
                     <connections>
                         <segue destination="wpd-Cu-BTC" kind="relationship" relationship="viewControllers" id="b2u-PW-ctH"/>
                         <segue destination="FIM-0k-bZ0" kind="relationship" relationship="viewControllers" id="fBq-AI-iCg"/>
+                        <segue destination="Pap-w9-rAD" kind="relationship" relationship="viewControllers" id="8Kf-ig-hke"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -84,10 +85,48 @@
             </objects>
             <point key="canvasLocation" x="1546" y="486"/>
         </scene>
+        <!--User Profile View Controller-->
+        <scene sceneID="wkZ-VM-a5X">
+            <objects>
+                <viewController title="User Profile View Controller" id="etk-MZ-JDM" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="86G-sp-dJr"/>
+                        <viewControllerLayoutGuide type="bottom" id="fCr-pz-Tsv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OBk-Rq-smq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqH-cz-Bt5">
+                                <rect key="frame" x="149" y="288" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsu-b7-HnQ">
+                                <rect key="frame" x="163" y="349" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="etk-MZ-JDM" eventType="touchUpInside" id="jAI-EJ-btN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O5E-0b-GlI"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="usernameLabel" destination="mqH-cz-Bt5" id="cCc-4v-GRc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwp-WR-kCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2135" y="1352"/>
+        </scene>
         <!--User Login View Controller-->
         <scene sceneID="MpW-9D-zb9">
             <objects>
-                <viewController id="gre-kY-3lT" customClass="UserLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userLoginViewController" id="gre-kY-3lT" customClass="UserLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h9h-Fb-n2R"/>
                         <viewControllerLayoutGuide type="bottom" id="aRS-wG-GRP"/>
@@ -163,6 +202,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iMl-lr-cAq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="734" y="486"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="6ar-bt-zJE">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pap-w9-rAD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" id="rfT-bk-16v"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pte-bz-odB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="etk-MZ-JDM" kind="relationship" relationship="rootViewController" id="kjf-2B-qKk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8CJ-Y9-obi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1323" y="1352"/>
         </scene>
     </scenes>
 </document>

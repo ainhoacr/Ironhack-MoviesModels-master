@@ -21,6 +21,9 @@ static NSString * const savedShowsFileName = @"shows";
 
 @property (strong,nonatomic) NSMutableArray *shows;
 @property (strong,nonatomic) ShowsProvider *showsProvider;
+@property (strong, nonatomic) NSMutableArray *likes;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *path;
 
 @end
 
@@ -92,6 +95,7 @@ static NSString * const savedShowsFileName = @"shows";
     if (self.shows.count)
     {
         [NSKeyedArchiver archiveRootObject:self.shows toFile:[self archivePath]];
+        [self saveLikes];
     }
 }
 
@@ -111,14 +115,25 @@ static NSString * const savedShowsFileName = @"shows";
     if (![self loggedUser]) {
         [self presentLoginView];
     }
+    else
+    {
+        self.userName = [self loggedUser].name;
+        self.navigationItem.title = self.userName;
+        NSString *documentsDirectory = nil;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        documentsDirectory = [paths objectAtIndex:0];
+        NSString *namePath = [NSString stringWithFormat:@"%@_saves.plist", self.userName];
+        self.path = [documentsDirectory stringByAppendingPathComponent:namePath];
+        [self loadLikes];
+    }
 }
 
-- (NSUInteger)loggedUser
+- (UserEntity *)loggedUser
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"UserEntity"];
     NSError *error;
     NSArray *fetchResult=[self.context executeFetchRequest:fetchRequest error:&error];
-    return fetchResult.count;
+    return [fetchResult firstObject];
 }
 
 - (void)presentLoginView
@@ -130,6 +145,23 @@ static NSString * const savedShowsFileName = @"shows";
 {
     UserLoginViewController *userLoginVC = segue.destinationViewController;
     userLoginVC.context = self.context;
+}
+
+- (void)saveLikes
+{
+    if (self.path) {
+        [@{@"likes":self.likes} writeToFile:self.path atomically:YES];
+    }
+}
+
+- (void)loadLikes
+{
+    if (self.path)
+    {
+        NSDictionary *dictonaryLikes = [NSDictionary dictionaryWithContentsOfFile:self.path];
+        self.likes = [[dictonaryLikes objectForKey:@"likes"] mutableCopy];
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Notification
@@ -151,7 +183,14 @@ static NSString * const savedShowsFileName = @"shows";
 {
     Show *show = self.shows[indexPath.item];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
-    
+    if ([self.likes containsObject:@(indexPath.row)]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+
     cell.textLabel.text = show.showTitle;
     cell.detailTextLabel.text = show.showDescription;
     
@@ -162,16 +201,17 @@ static NSString * const savedShowsFileName = @"shows";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Show *show=[self.shows objectAtIndex:indexPath.item];
-    
-    if (indexPath.row>=0 && indexPath.row<=1)
+    if ([self.likes containsObject:@(indexPath.row)])
     {
-        [self compareWithFirstShow:show];
+        [self.likes removeObject:@(indexPath.row)];
     }
     else
     {
-        [self findShow:show];
+        [self.likes addObject:@(indexPath.row)];
     }
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    
+    
 }
 
 - (void)compareWithFirstShow:(Show *)show
@@ -215,6 +255,14 @@ static NSString * const savedShowsFileName = @"shows";
     }];
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (NSMutableArray *)likes
+{
+    if (!_likes) {
+        _likes = [[NSMutableArray alloc]init];
+    }
+    return _likes;
 }
 
 @end

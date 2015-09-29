@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MoviesTableViewController.h"
 #import "ShowsTableViewController.h"
+#import "ProfileViewController.h"
 #import "CoreDataManager.h"
 
 @interface AppDelegate ()
@@ -19,21 +20,26 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSDate *date = [[NSUserDefaults standardUserDefaults]objectForKey:@"lastLoginDate"];
+    NSLog(@"Last Login Date: %@", date);
     
     CoreDataManager *coreDataManager = [[CoreDataManager alloc]init];
     
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     NSArray *arrayControllers = tabBarController.viewControllers;
-    if (arrayControllers.count == 2)
+    if (arrayControllers.count == 3)
     {
         UINavigationController *navigationShows = arrayControllers[0];
         UINavigationController *navigationMovies = arrayControllers[1];
+        UINavigationController *navigationProfile = arrayControllers[2];
         
         ShowsTableViewController *showsVC = (ShowsTableViewController *) navigationShows.topViewController;
         MoviesTableViewController *moviesVC = (MoviesTableViewController *) navigationMovies.topViewController;
+        ProfileViewController *profileVC = (ProfileViewController *)navigationProfile.topViewController;
         
         showsVC.context = coreDataManager.managedObjectContext;
         moviesVC.context = coreDataManager.managedObjectContext;
+        profileVC.context = coreDataManager.managedObjectContext;
     }
     
     return YES;
@@ -47,6 +53,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -59,6 +66,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 @end
